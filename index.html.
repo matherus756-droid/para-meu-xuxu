@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para meu Xuxu 🖤</title>
+
+<style>
+body{
+    margin:0;
+    background:#0a0a0a;
+    color:white;
+    font-family:Georgia, serif;
+    overflow-x:hidden;
+}
+
+section{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:30px;
+}
+
+h1{
+    font-size:3rem;
+    color:#8b0000;
+    margin:0;
+}
+
+.sub{
+    margin-top:15px;
+    font-size:1.1rem;
+    color:#ddd;
+}
+
+#dias{
+    font-size:5rem;
+    color:#b22222;
+    font-weight:bold;
+}
+
+.tempo{
+    font-size:1.2rem;
+    margin-top:10px;
+}
+
+.frase{
+    margin-top:20px;
+    font-style:italic;
+    color:#ccc;
+}
+
+.coracao{
+    position:fixed;
+    top:-20px;
+    animation:cair linear forwards;
+    opacity:.4;
+}
+
+/* Estilo da Galeria com as 9 Fotos */
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    max-width: 900px;
+    padding: 10px;
+}
+
+.galeria img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border: 2px solid #8b0000;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+}
+
+@keyframes cair{
+    to{
+        transform:translateY(110vh);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música de Fundo: Art Deco - Lana Del Rey -->
+<div style="position: absolute; top: -9999px; left: -9999px;">
+    <iframe width="100" height="100" src="https://youtube.com" allow="autoplay"></iframe>
+</div>
+
+<section>
+    <h1>Para meu Xuxu 🖤</h1>
+    <div class="sub">Toda Morticia encontra seu Gomez.</div>
+</section>
+
+<section>
+    <h1>Nosso Tempo</h1>
+    <div id="dias">0</div>
+    <div class="tempo" id="contador"></div>
+    <div class="frase">"E eu escolheria você novamente."</div>
+</section>
+
+<!-- Seção das 9 Fotos do Casal -->
+<section>
+    <h1>Nossos Momentos</h1>
+    <div class="galeria">
+        <img src="https://ibb.co" alt="Foto 1">
+        <img src="https://ibb.co" alt="Foto 2">
+        <img src="https://ibb.co" alt="Foto 3">
+        <img src="https://ibb.co" alt="Foto 4">
+        <img src="https://ibb.co" alt="Foto 5">
+        <img src="https://ibb.co" alt="Foto 6">
+        <img src="https://ibb.co" alt="Foto 7">
+        <img src="https://ibb.co" alt="Foto 8">
+        <img src="https://ibb.co" alt="Foto 9">
+    </div>
+</section>
+
+<script>
+const inicio = new Date("2025-03-12T00:00:00");
+
+function atualizar(){
+    const agora = new Date();
+    const diferenca = agora - inicio;
+    const dias = Math.floor(diferenca/(1000*60*60*24));
+    const horas = Math.floor((diferenca%(1000*60*60*24))/(1000*60*60));
+    const minutos = Math.floor((diferenca%(1000*60*60))/(1000*60));
+    const segundos = Math.floor((diferenca%(1000*60))/1000);
+
+    document.getElementById("dias").innerText = dias;
+    document.getElementById("contador").innerHTML = `${horas} horas • ${minutos} minutos • ${segundos} segundos`;
+}
+
+setInterval(atualizar,1000);
+atualizar();
+
+function criarCoracao(){
+    const c = document.createElement("div");
+    c.innerHTML = "🖤";
+    c.className = "coracao";
+    c.style.left = Math.random()*100+"vw";
+    c.style.fontSize = (Math.random()*15+10)+"px";
+    c.style.animationDuration = (Math.random()*5+5)+"s";
+    document.body.appendChild(c);
+
+    setTimeout(()=>{
+        c.remove();
+    },10000);
+}
+
+setInterval(criarCoracao,1200);
+</script>
+
+</body>
+</html>
