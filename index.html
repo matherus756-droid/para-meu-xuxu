@@ -60,24 +60,46 @@ h1{
     opacity:.4;
 }
 
-/* Estilo da Galeria com as 9 Fotos */
-.galeria {
+/* Novo Estilo: Fotos Grandes uma embaixo da outra */
+.feed-fotos {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
-    max-width: 900px;
-    padding: 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 500px;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
-.galeria img {
-    width: 140px;
-    height: 140px;
+.bloco-foto {
+    width: 100%;
+    text-align: center;
+}
+
+.feed-fotos img {
+    width: 100%;
+    max-height: 70vh;
     object-fit: cover;
-    border: 2px solid #8b0000;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.6);
+    border: 3px solid #8b0000;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+}
+
+.legenda {
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-style: italic;
+    color: #e0e0e0;
+    padding: 0 10px;
+    line-height: 1.4;
+}
+
+.gomes {
+    color: #b22222;
+    font-weight: bold;
+    font-size: 1.4rem;
 }
 
 @keyframes cair{
@@ -107,19 +129,54 @@ h1{
     <div class="frase">"E eu escolheria você novamente."</div>
 </section>
 
-<!-- Seção das 9 Fotos do Casal -->
-<section>
+<!-- Seção das Fotos Grandes com Legendas Fofas -->
+<section style="min-height: auto; padding-bottom: 100px;">
     <h1>Nossos Momentos</h1>
-    <div class="galeria">
-        <img src="https://ibb.co" alt="Foto 1">
-        <img src="https://ibb.co" alt="Foto 2">
-        <img src="https://ibb.co" alt="Foto 3">
-        <img src="https://ibb.co" alt="Foto 4">
-        <img src="https://ibb.co" alt="Foto 5">
-        <img src="https://ibb.co" alt="Foto 6">
-        <img src="https://ibb.co" alt="Foto 7">
-        <img src="https://ibb.co" alt="Foto 8">
-        <img src="https://ibb.co" alt="Foto 9">
+    
+    <div class="feed-fotos">
+        
+        <!-- Foto 1 (Capa do Canva) -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 1">
+            <div class="legenda">"Meu lugar favorito no mundo é nos seus braços."</div>
+        </div>
+
+        <!-- Foto 2 -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 2">
+            <div class="legenda">"Você é o motivo dos meus melhores sorrisos."</div>
+        </div>
+
+        <!-- Foto 3 -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 3">
+            <div class="legenda">"Cada detalhe seu me faz te amar ainda mais."</div>
+        </div>
+
+        <!-- Foto 4 -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 4">
+            <div class="legenda">"Obrigada por ser meu porto seguro e meu melhor amigo."</div>
+        </div>
+
+        <!-- Foto 5 -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 5">
+            <div class="legenda">"Com você, a vida é muito mais bonita e cheia de cor."</div>
+        </div>
+
+        <!-- Foto 6 -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 6">
+            <div class="legenda">"Eu escolheria você em todas as vidas possíveis."</div>
+        </div>
+
+        <!-- Foto 7 (Última foto) -->
+        <div class="bloco-foto">
+            <img src="https://ibb.co" alt="Foto 7">
+            <div class="legenda gomes">"Para sempre meu gomes 🖤"</div>
+        </div>
+
     </div>
 </section>
 
@@ -131,11 +188,11 @@ function atualizar(){
     const diferenca = agora - inicio;
     const dias = Math.floor(diferenca/(1000*60*60*24));
     const horas = Math.floor((diferenca%(1000*60*60*24))/(1000*60*60));
-    const minutos = Math.floor((diferenca%(1000*60*60))/(1000*60));
+    const minutes = Math.floor((diferenca%(1000*60*60))/(1000*60));
     const segundos = Math.floor((diferenca%(1000*60))/1000);
 
     document.getElementById("dias").innerText = dias;
-    document.getElementById("contador").innerHTML = `${horas} horas • ${minutos} minutos • ${segundos} segundos`;
+    document.getElementById("contador").innerHTML = `${horas} horas • ${minutes} minutos • ${segundos} segundos`;
 }
 
 setInterval(atualizar,1000);
