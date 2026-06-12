@@ -8,7 +8,8 @@
 <style>
 body{
     margin:0;
-    background:#0a0a0a;
+    background-color: #050505;
+    background-image: radial-gradient(circle, #0f0505 0%, #050505 100%);
     color:white;
     font-family:Georgia, serif;
     overflow-x:hidden;
@@ -21,90 +22,170 @@ section{
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:30px;
+    padding:40px 20px;
+    box-sizing: border-box;
 }
 
 h1{
     font-size:3rem;
-    color:#8b0000;
+    color:#800020; /* Vinho Elegante Sem Brilho */
     margin:0;
+    letter-spacing: 2px;
 }
 
 .sub{
-    margin-top:15px;
-    font-size:1.1rem;
-    color:#ddd;
+    margin-top:20px;
+    font-size:1.2rem;
+    color:#b3b3b3;
+    font-style: italic;
 }
 
 #dias{
-    font-size:5rem;
-    color:#b22222;
+    font-size:5.5rem;
+    color:#800020;
     font-weight:bold;
+    margin: 10px 0;
 }
 
 .tempo{
-    font-size:1.2rem;
+    font-size:1.3rem;
     margin-top:10px;
+    color: #ccc;
+    letter-spacing: 1px;
 }
 
 .frase{
-    margin-top:20px;
+    margin-top:25px;
     font-style:italic;
-    color:#ccc;
+    color:#999;
+    font-size: 1.1rem;
 }
 
-.coracao{
+.elemento-queda{
     position:fixed;
-    top:-20px;
+    top:-30px;
     animation:cair linear forwards;
-    opacity:.4;
+    user-select: none;
+    pointer-events: none;
 }
 
-/* Novo Estilo: Fotos Grandes uma embaixo da outra */
+/* Player Estilo Spotify */
+.spotify-player {
+    background: #0d0d0d;
+    border: 2px solid #580000;
+    border-radius: 16px;
+    padding: 20px;
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 35px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.9);
+}
+
+.spotify-title {
+    font-size: 0.9rem;
+    color: #800020;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.spotify-sub {
+    font-size: 1rem;
+    color: #eee;
+    font-weight: 500;
+}
+
+.spotify-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.btn-play {
+    background: #580000;
+    border: none;
+    color: white;
+    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(88,0,0,0.4);
+    transition: transform 0.2s;
+}
+
+.btn-play:active {
+    transform: scale(0.95);
+}
+
+.spotify-bar {
+    width: 100%;
+    height: 5px;
+    background: #222;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.spotify-progress {
+    width: 65%;
+    height: 100%;
+    background: #800020;
+}
+
+/* Feed de Fotos Romântico Dark */
 .feed-fotos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    margin-top: 40px;
+    gap: 55px;
+    margin-top: 50px;
     width: 100%;
-    max-width: 500px;
-    padding: 0 15px;
-    box-sizing: border-box;
+    max-width: 480px;
 }
 
 .bloco-foto {
     width: 100%;
     text-align: center;
+    background: rgba(10, 10, 10, 0.6);
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .feed-fotos img {
     width: 100%;
-    max-height: 70vh;
+    max-height: 75vh;
     object-fit: cover;
-    border: 3px solid #8b0000;
-    border-radius: 12px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    border: 3px double #800020;
+    border-radius: 8px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.9);
 }
 
 .legenda {
-    margin-top: 15px;
-    font-size: 1.2rem;
+    margin-top: 20px;
+    font-size: 1.25rem;
     font-style: italic;
-    color: #e0e0e0;
+    color: #e5e5e5;
     padding: 0 10px;
-    line-height: 1.4;
+    line-height: 1.5;
+    font-family: 'Times New Roman', serif;
 }
 
 .gomes {
     color: #b22222;
     font-weight: bold;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
 }
 
 @keyframes cair{
     to{
-        transform:translateY(110vh);
+        transform: translateY(110vh) rotate(360deg);
     }
 }
 </style>
@@ -112,14 +193,24 @@ h1{
 
 <body>
 
-<!-- Música de Fundo: Art Deco - Lana Del Rey -->
+<!-- Player do YouTube Oculto -->
 <div style="position: absolute; top: -9999px; left: -9999px;">
-    <iframe width="100" height="100" src="https://youtube.com" allow="autoplay"></iframe>
+    <div id="player"></div>
 </div>
 
 <section>
     <h1>Para meu Xuxu 🖤</h1>
     <div class="sub">Toda Morticia encontra seu Gomez.</div>
+
+    <!-- Tocador Visual Estilo Spotify -->
+    <div class="spotify-player">
+        <div class="spotify-title">NOSSA MÚSICA</div>
+        <div class="spotify-sub">Art Deco - Lana Del Rey</div>
+        <div class="spotify-bar"><div class="spotify-progress"></div></div>
+        <div class="spotify-controls">
+            <button class="btn-play" id="playBtn" onclick="togglePlay()">▶</button>
+        </div>
+    </div>
 </section>
 
 <section>
@@ -129,60 +220,68 @@ h1{
     <div class="frase">"E eu escolheria você novamente."</div>
 </section>
 
-<!-- Seção das Fotos Grandes com Legendas Fofas -->
-<section style="min-height: auto; padding-bottom: 100px;">
+<section style="min-height: auto; padding-bottom: 120px;">
     <h1>Nossos Momentos</h1>
-    
     <div class="feed-fotos">
-        
-        <!-- Foto 1 (Capa do Canva) -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 1">
             <div class="legenda">"Meu lugar favorito no mundo é nos seus braços."</div>
         </div>
-
-        <!-- Foto 2 -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 2">
             <div class="legenda">"Você é o motivo dos meus melhores sorrisos."</div>
         </div>
-
-        <!-- Foto 3 -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 3">
             <div class="legenda">"Cada detalhe seu me faz te amar ainda mais."</div>
         </div>
-
-        <!-- Foto 4 -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 4">
             <div class="legenda">"Obrigada por ser meu porto seguro e meu melhor amigo."</div>
         </div>
-
-        <!-- Foto 5 -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 5">
-            <div class="legenda">"Com você, a vida é muito mais bonita e cheia de cor."</div>
+            <div class="legenda">"Com você, a vida é muito mais bonita."</div>
         </div>
-
-        <!-- Foto 6 -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 6">
             <div class="legenda">"Eu escolheria você em todas as vidas possíveis."</div>
         </div>
-
-        <!-- Foto 7 (Última foto) -->
         <div class="bloco-foto">
             <img src="https://ibb.co" alt="Foto 7">
             <div class="legenda gomes">"Para sempre meu gomes 🖤"</div>
         </div>
-
     </div>
 </section>
 
+<script src="https://youtube.com"></script>
 <script>
-const inicio = new Date("2025-03-12T00:00:00");
+let player;
+let tocando = false;
 
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '100',
+        width: '100',
+        videoId: 'QbLGjeR9bvI',
+        playerVars: { 'autoplay': 0, 'controls': 0, 'loop': 1, 'playlist': 'QbLGjeR9bvI' }
+    });
+}
+
+function togglePlay() {
+    const btn = document.getElementById("playBtn");
+    if (!tocando) {
+        player.playVideo();
+        btn.innerText = "⏸";
+        tocando = true;
+    } else {
+        player.pauseVideo();
+        btn.innerText = "▶";
+        tocando = false;
+    }
+}
+
+const inicio = new Date("2025-03-12T00:00:00");
 function atualizar(){
     const agora = new Date();
     const diferenca = agora - inicio;
@@ -190,29 +289,27 @@ function atualizar(){
     const horas = Math.floor((diferenca%(1000*60*60*24))/(1000*60*60));
     const minutes = Math.floor((diferenca%(1000*60*60))/(1000*60));
     const segundos = Math.floor((diferenca%(1000*60))/1000);
-
     document.getElementById("dias").innerText = dias;
     document.getElementById("contador").innerHTML = `${horas} horas • ${minutes} minutos • ${segundos} segundos`;
 }
-
 setInterval(atualizar,1000);
 atualizar();
 
-function criarCoracao(){
-    const c = document.createElement("div");
-    c.innerHTML = "🖤";
-    c.className = "coracao";
-    c.style.left = Math.random()*100+"vw";
-    c.style.fontSize = (Math.random()*15+10)+"px";
-    c.style.animationDuration = (Math.random()*5+5)+"s";
-    document.body.appendChild(c);
-
-    setTimeout(()=>{
-        c.remove();
-    },10000);
+function criarElemento(){
+    const el = document.createElement("div");
+    const listaElementos = ["🥀", "🍷", "🖤", "🍷"]; 
+    
+    el.innerHTML = listaElementos[Math.floor(Math.random() * listaElementos.length)];
+    el.className = "elemento-queda";
+    el.style.left = Math.random() * 100 + "vw";
+    el.style.fontSize = (Math.random() * 20 + 15) + "px";
+    el.style.animationDuration = (Math.random() * 5 + 6) + "s";
+    el.style.opacity = Math.random() * 0.5 + 0.3;
+    
+    document.body.appendChild(el);
+    setTimeout(() => { el.remove(); }, 11000);
 }
-
-setInterval(criarCoracao,1200);
+setInterval(criarElemento, 900);
 </script>
 
 </body>
